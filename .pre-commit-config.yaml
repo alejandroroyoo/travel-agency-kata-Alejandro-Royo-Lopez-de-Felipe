@@ -1,0 +1,25 @@
+repos:
+  - repo: local
+    hooks:
+      - id: format-java
+        name: Google Java Format
+        entry: bash
+        args:
+          - -c
+          - >
+            for file in $(git ls-files '*.java'); do
+              java -jar tools/google-java-format.jar -i "$file";
+            done
+        language: system
+        types_or: [java]
+
+      - id: run-tests
+        name: Run Maven Tests
+        entry: bash
+        args:
+          - -c
+          - mvn test
+        language: system
+        pass_filenames: false
+      
+
