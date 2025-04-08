@@ -48,3 +48,10 @@ jobs:
       - name: Push Docker image
         run: docker push alexpaulsito/travel-agency-kata:latest
 
+  deploy:
+    environment: poc
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment on Render
+        run: curl -X POST https://api.render.com/deploy/srv-cvqmvn6uk2gs73ckbu9g?key=MgawUMuo2_s
