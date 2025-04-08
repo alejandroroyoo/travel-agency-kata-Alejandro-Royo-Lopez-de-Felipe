@@ -21,4 +21,11 @@ jobs:
       - name: Format code (auto-fix)
         run: |
           find . -name "*.java" | xargs java -jar google-java-format.jar -i
-      
+  build:
+    environment: poc
+    needs: code-quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build . -t alexpaulsito/travel-agency-kata:latest
+
